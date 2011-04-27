@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>DaBlog</title>
-  <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :defaults %>
-  <%= csrf_meta_tag %>
-</head>
-<body>
-
-<%= yield %>
-
-</body>
+  <head>
+    <title><%= title %></title>
+    <%= csrf_meta_tag %>
+    <%= render 'layouts/stylesheets' %>
+  </head>
+  <body>
+	
+	<header>
+	   	<div class="container">
+		      <%= render 'layouts/header' %>
+		      <section class="round">
+		        <%= yield %>
+		      </section>
+		      <%= render 'layouts/footer' %>
+		</div>
+	</header>
+  </body>
 </html>
