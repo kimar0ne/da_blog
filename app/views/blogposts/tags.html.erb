@@ -1,0 +1,18 @@
+<div class="title">
+<h1>WELCOME TO DA BLOG</h1>
+</div>
+
+
+<div class="page">
+
+  <div class="blogframe">
+
+<table class="blogposts" summary="User blogposts">
+          <%= render @blogposts %>
+</table>
+
+<%= will_paginate @blogposts %>
+
+  </div>
+
+</div>

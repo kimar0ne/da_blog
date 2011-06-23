@@ -1,0 +1,43 @@
+<%= form_for(@blogpost) do |f| %>
+  <% if @blogpost.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@blogpost.errors.count, "error") %> prohibited this blogpost from being saved:</h2>
+
+      <ul>
+      <% @blogpost.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="title_field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="content_area">
+    <%= f.label :content %><br />
+    <%= f.text_area :content, :rows => 6 %>
+  </div>
+
+  <div class="category_field">
+    <%= f.label :Category %><br />
+
+
+    <% Category.find(:all).each do |category| %>
+        <p>
+            <%= check_box_tag "blogpost[category_ids][]", category.id, blogpost_belongs_category?(category) -%> <%= category.name -%>
+        </p>
+    <% end %>
+
+
+  </div>
+
+  <div class="publish_checkbox">
+    <%= f.label :published %><br />
+    <%= f.check_box :published %>
+  </div>
+  <div class="blogpost_actions">
+    <%= f.submit %>
+  </div>
+<% end %>

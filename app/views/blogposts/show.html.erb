@@ -1,0 +1,34 @@
+<div class="title">
+    <h1><%= @blogpost.title %></h1>
+</div>
+
+
+<div class="page">
+
+<p>
+  <b>Title:</b>
+  <%= @blogpost.title %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @blogpost.content %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @blogpost.category %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @blogpost.user_id %>
+</p>
+
+<p id="notice"><%= notice %></p>
+
+
+<%= link_to 'Edit', edit_blogpost_path(@blogpost) %> |
+<%= link_to 'Back', blogposts_path %>
+
+</div>

@@ -1,0 +1,35 @@
+
+<div class="title">
+<h1>BLOGPOSTS</h1>
+</div>
+
+<div class="page">
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Category</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @blogposts.each do |blogpost| %>
+  <tr>
+    <td><%= blogpost.title %></td>
+    <td>
+        <% blogpost.categories.each do |category| %> <%= category.name %>  <% end %>
+    </td>
+    <td><%= blogpost.user.login %></td>
+    <td><%= link_to 'Show', blogpost %> |</td>
+    <td> <%= link_to 'Edit', edit_blogpost_path(blogpost) %> |</td>
+    <td> <%= link_to 'Destroy', blogpost, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Blogpost', new_blogpost_path %>
+
+</div>

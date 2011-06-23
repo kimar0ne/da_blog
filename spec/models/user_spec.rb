@@ -93,7 +93,7 @@ describe User do
      end
 
      it "should reject short passwords" do
-       short = "a" * 5
+       short = "a" * 3
        hash = @attr.merge(:password => short, :password_confirmation => short)
        User.new(hash).should_not be_valid
      end
@@ -146,8 +146,45 @@ describe User do
               matching_user = User.authenticate(@attr[:email], @attr[:password])
               matching_user.should == @user
             end
-          end
-          
+          end         
+   end
+
+  describe "admin attribute" do
+
+    before(:each) do
+      @user = User.create!(@attr)
     end
+
+    it "should respond to admin" do
+      @user.should respond_to(:admin)
+    end
+
+    it "should not be an admin by default" do
+      @user.should_not be_admin
+    end
+
+    it "should be convertible to an admin" do
+      @user.toggle!(:admin)
+      @user.should be_admin
+    end
+  end
+
+
+  describe "blogpost associations" do
+
+    before(:each) do
+      @user = User.create(@attr)
+      @mp1 = Factory(:blogpost, :user => @user, :created_at => 1.day.ago)
+      @mp2 = Factory(:blogpost, :user => @user, :created_at => 1.hour.ago)
+    end
+
+    it "should have a microposts attribute" do
+      @user.should respond_to(:blogposts)
+    end
+
+    it "should have the right microposts in the right order" do
+      @user.blogposts.should == [@mp2, @mp1]
+    end
+  end
       
 end

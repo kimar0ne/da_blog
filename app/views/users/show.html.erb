@@ -1,5 +1,12 @@
+
+<div class="title">
+    <h1>USER PROFILE</h1>
+</div>
+
 <p id="notice"><%= notice %></p>
 
+
+<div class="page">
 
 <table class="profile" summary="Profile information">
   <tr>
@@ -17,6 +24,9 @@
   </tr>
 </table>
 
-
+<% if is_admin? %>
 <%= link_to 'Edit', edit_user_path(@user) %> |
+<% end %>
 <%= link_to 'Back', users_path %>
+
+</div>

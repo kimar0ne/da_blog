@@ -1,0 +1,30 @@
+<div class="title">
+<h1>WELCOME TO DA BLOG</h1>
+</div>
+
+
+<div class="page">
+
+  <div class="blogframe">
+
+    <table class="blogposts" summary="User blogposts">
+          <%= render @blogposts %>
+    </table>
+
+    <%= will_paginate @blogposts %>
+
+
+    <table class="categories" summary="Blogpost categories">
+             <tr><td><%= link_to "All", root_path %></td></tr>
+
+    <% @categories.each do |category| %>
+            <tr>
+                <td><%= link_to category.name, category %></td>
+            </tr>
+    <% end %>
+
+    </table>
+
+  </div>
+
+</div>

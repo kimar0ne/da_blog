@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   attr_accessor :password
   attr_accessible :login, :firstname, :lastname, :email, :password, :password_confirmation
 
+  has_many :blogposts
+
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
   validates :firstname, :presence => true,
@@ -18,7 +20,7 @@ class User < ActiveRecord::Base
 
   validates :password, :presence     => true,
                        :confirmation => true,
-                       :length       => { :within => 6..16 }
+                       :length       => { :within => 4..16 }
   
   before_save :encrypt_password
 
@@ -32,10 +34,16 @@ class User < ActiveRecord::Base
       return user if user.has_password?(submitted_password)
     end
 
+    def self.authenticate_with_salt(id, cookie_salt)
+      user = find_by_id(id)
+      (user && user.salt == cookie_salt) ? user : nil
+    end
+
 
   private
 
       def encrypt_password
+        return if password.nil?
         self.salt = make_salt if new_record?
         self.encrypted_password = encrypt(password)
       end

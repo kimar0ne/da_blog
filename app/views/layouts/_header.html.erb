@@ -1,10 +1,20 @@
 <header>
-  <!-- <%= image_tag("logo.png", :alt => "Sample App", :class => "round") %> -->
-  <nav class="round">
-    <ul>
-      <li><%= link_to "Home", root_path %></li>
-      <li><%= link_to "About", about_path %></li>
-      <li><%= link_to "Sign in", '#' %></li>
-    </ul>
-  </nav>
-</header>
+
+    <nav class="round">
+		<ul>
+			    <li><%= link_to "HOME", root_path %></li>
+			<% if signed_in? %>
+			    <li><%= link_to "USERS", users_path %></li>
+			    <li><%= link_to "PROFILE", current_user %></li>
+            <% end %>
+            <% if is_admin? %>
+			    <li><%= link_to "BLOGPOSTS", blogposts_path %></li>
+			<% end %>
+			    <li><%= link_to "ABOUT", about_path %></li>
+			<% if signed_in? %>
+			    <li><%= link_to "SIGN OUT", signout_path, :method => :delete %></li>
+			<% else %>
+			    <li><%= link_to "SIGN IN", signin_path %></li>
+			<% end %>    </ul>
+		</nav>
+	</header>

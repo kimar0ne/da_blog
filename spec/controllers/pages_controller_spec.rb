@@ -17,6 +17,7 @@ describe PagesController do
       get 'home'
       response.should have_selector("title", :content => @base_title + " | Home")
     end
+
     
   end
 

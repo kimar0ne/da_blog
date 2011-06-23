@@ -1,0 +1,7 @@
+<tr>
+  <td class="blogpost">
+    <div class="blog_title"><%= blogpost.title %></div>
+    <div class="blog_timestamp">Posted <%= time_ago_in_words(blogpost.created_at) %> ago by <%= blogpost.user.login %></div>
+    <div class="blog_content"><%= blogpost.content %></div>
+  </td>
+</tr>
